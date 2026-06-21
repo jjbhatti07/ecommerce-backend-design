@@ -78,7 +78,7 @@ const Header = ({ setPage, onSearch, user, setUser }) => {
       <div className="border-t border-shade-border bg-white overflow-x-auto lg:overflow-visible no-scrollbar">
         <div className="container py-3 flex items-center justify-between whitespace-nowrap gap-4">
           <nav className="flex items-center gap-6 font-medium text-dark">
-            <div className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors" onClick={() => setPage('listing')}>
+            <div className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors" onClick={() => { setSearchTerm(''); onSearch(''); setPage('listing'); }}>
               <Menu className="w-5 h-5" />
               <span>All category</span>
             </div>
