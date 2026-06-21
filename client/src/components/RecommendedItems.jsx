@@ -6,7 +6,7 @@ const RecommendedItems = ({ setPage }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products?limit=10')
+    axios.get(`${import.meta.env.VITE_API_URL}/api/products?limit=10`)
       .then(res => {
         setItems(res.data.products);
         setLoading(false);
