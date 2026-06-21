@@ -31,7 +31,7 @@ const AddProduct = ({ setPage }) => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/products', form, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, form, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

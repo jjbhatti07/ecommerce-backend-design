@@ -18,7 +18,7 @@ const ProductDetails = ({ setPage }) => {
    useEffect(() => {
       const id = localStorage.getItem('selectedProduct');
       if (id) {
-         axios.get(`http://localhost:5000/api/products/${id}`)
+         axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
             .then(res => {
                setProduct(res.data);
                setLoading(false);

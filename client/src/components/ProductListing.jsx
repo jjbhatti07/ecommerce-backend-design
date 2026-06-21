@@ -13,33 +13,33 @@ import phone2 from '../assets/Image/tech/image 34.png';
 
 const ProductListing = ({ setPage, searchTerm }) => {
   const [viewMode, setViewMode] = useState('grid');  // Default to grid as per new request
-const [products, setProducts] = useState([]);
-const [loading, setLoading] = useState(true);
-const [currentPage, setCurrentPage] = useState(1);
-const [totalPages, setTotalPages] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-useEffect(() => {
-  setCurrentPage(1);
-}, [searchTerm]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
-useEffect(() => {
-  setLoading(true);
-  let url = `http://localhost:5000/api/products?page=${currentPage}`;
-  if (searchTerm) url += `&search=${searchTerm}`;
+  useEffect(() => {
+    setLoading(true);
+    let url = `${import.meta.env.VITE_API_URL}/api/products?page=${currentPage}`;
+    if (searchTerm) url += `&search=${searchTerm}`;
 
-  axios.get(url)
-    .then(res => {
-      setProducts(res.data.products);
-      setTotalPages(res.data.totalPages);
-      setLoading(false);
-    })
-    .catch(err => {
-      console.log(err);
-      setLoading(false);
-    });
-}, [searchTerm, currentPage]);
+    axios.get(url)
+      .then(res => {
+        setProducts(res.data.products);
+        setTotalPages(res.data.totalPages);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [searchTerm, currentPage]);
 
-const activeFilters = [
+  const activeFilters = [
     "Samsung", "Apple", "Poco", "Metallic", "4 star", "3 star"
   ];
 
@@ -312,26 +312,26 @@ const activeFilters = [
 
           {/* Pagination */}
           <div className="flex justify-end mt-8">
-  <div className="flex items-center gap-3">
-    <div className="flex border border-[#DEE2E7] rounded-md overflow-hidden bg-white">
-      <div
-        className={`px-3 py-2 border-r border-[#DEE2E7] text-dark flex items-center ${currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer hover:bg-shade'}`}
-        onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-      >{"<"}</div>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-        <div
-          key={page}
-          className={`px-4 py-2 border-r border-[#DEE2E7] cursor-pointer text-dark text-sm transition-colors ${currentPage === page ? 'bg-primary text-white font-bold' : 'hover:bg-shade'}`}
-          onClick={() => setCurrentPage(page)}
-        >{page}</div>
-      ))}
-      <div
-        className={`px-3 py-2 text-dark flex items-center ${currentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer hover:bg-shade'}`}
-        onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
-      >{">"}</div>
-    </div>
-  </div>
-</div>
+            <div className="flex items-center gap-3">
+              <div className="flex border border-[#DEE2E7] rounded-md overflow-hidden bg-white">
+                <div
+                  className={`px-3 py-2 border-r border-[#DEE2E7] text-dark flex items-center ${currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer hover:bg-shade'}`}
+                  onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+                >{"<"}</div>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <div
+                    key={page}
+                    className={`px-4 py-2 border-r border-[#DEE2E7] cursor-pointer text-dark text-sm transition-colors ${currentPage === page ? 'bg-primary text-white font-bold' : 'hover:bg-shade'}`}
+                    onClick={() => setCurrentPage(page)}
+                  >{page}</div>
+                ))}
+                <div
+                  className={`px-3 py-2 text-dark flex items-center ${currentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer hover:bg-shade'}`}
+                  onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+                >{">"}</div>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
